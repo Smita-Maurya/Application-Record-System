@@ -1,0 +1,57 @@
+{
+    "name":"Wanderlust",
+    "version": "1.0.0",
+    "manifest_version":3,
+    "description":"Job application record system",
+    "action": {
+        "default_popup": "popup.html",
+        "default_title": "__MSG_buttonDefaultTooltip__"
+      },
+    "icons":{
+        "128":"logo.png"
+    },
+   
+    "permissions":[
+        "http://localhost:8070/listings",
+        "activeTab",
+        "storage",
+        "identity",
+		"menus",
+		"contextMenus",
+		"downloads",
+		"tabs",
+		"<all_urls>"
+    ],
+    "background":{
+        "script": [
+            "views/listings/edit.ejs", 
+            "views/listings/index.ejs", 
+            "views/listings/new.ejs", 
+            "views/listings/show.ejs"]
+    },
+     
+    "content_scripts":[{
+        "matches":["<all_urls>"],
+        "run_at": "document_start",
+        "js": ["app.js"]
+    }],
+
+    "commands": {
+		"save-selected-tabs": {
+			"suggested_key": {
+				"default": "Ctrl+Shift+Y"
+			},
+			"description": "__MSG_commandSaveSelectedTabs__"
+		},
+		"save-all-tabs": {
+			"suggested_key": {
+				"default": "Ctrl+Shift+U"
+			},
+			"description": "__MSG_commandSaveAllTabs__"
+		}
+	}
+
+    
+
+    
+}

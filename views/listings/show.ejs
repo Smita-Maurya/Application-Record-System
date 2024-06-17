@@ -1,0 +1,117 @@
+ 
+<style>
+    .row{
+        background-image: url("https://i.stack.imgur.com/p9mUO.jpg");
+    }
+    .show-card{
+      padding:0;
+       
+    }
+</style>
+<% layout("/layouts/boilerplate") %>
+<!-- <body> -->
+    <div class="row mt-3">
+        <div class="col-8 offset-3">
+
+    
+    <h3>Application Details: </h3>
+</div> 
+    <div class="card col-6 offset-3 show-card">
+        <!-- <img src="<%=listing.resumeLink %>" class="card-img-top show-img" alt="listing_resumeLink"> -->
+        <div class="card-body">
+    <p class="card-text">
+        <div class="companycard">
+        <b><%=listing.company%></b>
+    </div><br/>
+    <div class="companycard">
+        <b>Job Title: </b><%= listing.jobtitle%><br/>
+    </div><br/>
+    <div class="companycard">
+      <b>Resume Link: </b><%= listing.resumeLink%><br/>
+  </div><br/>
+    <div class="companycard">
+        <b>Portfolio Link: </b><%= listing.portfolioLink%><br/>
+    </div><br/>
+    <div class="companycard">
+        <b>Date of Application: </b><%= listing.applicationdate%><br/>
+    </div><br/>
+
+        <div class="dropdown"  onclick="statusdropdown()">
+            <div class="select">
+              <span class="selected" ><%= listing.status%></span>
+              <div class="caret"></div>
+            </div>
+            <ul class="menu">
+              <li class="option">
+                <span class="option-text">Accepted</span>
+              </li>
+              <li class="option">
+                <span class="option-text">Interviewed</span>
+              </li>
+              <li class="option">
+                <span class="option-text">Under Consideration</span>
+              </li>
+              <li class="option">
+                <span class="option-text">Inactive</span>
+              </li>
+              <li class="option">
+                <span class="option-text">Rejected</span>
+              </li>
+              <li class="active option">
+                <span class="option-text">Status</span>
+              </li>
+            </ul>
+          </div>
+
+    </p>
+  </div><br/>
+    </div><br/>
+     
+    <div class="btns">
+    <a href="/listings/<%=listing._id%>/edit" class="btn btn-dark col-1 offset-3 edit-btn">Edit</a>
+    <br/><br/>
+    <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE">
+        <button class="btn btn-dark  offset-5">Delete</button>
+    </form>
+</div>
+ 
+</div>
+
+<script>
+    function statusdropdown(){
+      const dropdowns=document.querySelectorAll(".dropdown");
+    
+      dropdowns.forEach(dropdown=>{
+        const select = dropdown.querySelector(".select");
+        const caret = dropdown.querySelector(".caret");
+        const menu = dropdown.querySelector(".menu");
+        // const options = dropdown.querySelector(".menu li");
+         const options = dropdown.querySelectorAll(".option");
+        const selected = dropdown.querySelector(".selected");
+    
+    
+        select.addEventListener("click", ()=>{
+          select.classList.toggle("select-clicked");
+          caret.classList.toggle("caret-rotate");
+          menu.classList.toggle("menu-open");
+        });
+    
+    
+        options.forEach(option=>{
+          option.addEventListener("click",()=>{
+            selected.innerText=option.querySelector(".option-text").innerText;
+            select.classList.remove("select-clicked");
+            caret.classList.remove("caret-rotate");
+            menu.classList.remove("menu-open");
+    
+            options.forEach(option=>{
+              option.classList.remove("active");
+            });
+            option.classList.add("active");
+          });
+        });
+      });
+  }
+  </script>
+<!-- </body> -->
+<!-- </html> -->

@@ -1,0 +1,129 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WanderLust</title>
+</head>
+<body> -->
+    <style>
+        .row{
+             background-image: url("https://i.pinimg.com/736x/bd/40/86/bd4086b073a75c535b043662fe40030f.jpg");
+        }
+    </style>
+    <% layout("/layouts/boilerplate")%>
+    <div class="row mt-3">
+        <div class="col-8 offset-2">
+
+       
+    <h3>Edit Your Application</h3>
+    <form method="POST" action="/listings/<%=listing._id%>?_method=PUT" novalidate class="needs-validation" >
+        <div class="mb-3 "> 
+            <label for="company" class="form-label"><b>Company Name</b></label>
+        <input name="listing[company]" value="<%=listing.company%>" type="text"  class="form-control" required/>
+        <div class="valid-feedback">Company Looks Good</div>
+        </div>
+
+        <div class="mb-3 "> 
+            <label for="jobtitle" class="form-label"><b>Job Title</b></label>
+        <input name="listing[jobtitle]" value="<%=listing.jobtitle%>" type="text"  class="form-control" required/>
+        <div class="valid-feedback">Job title Looks Good</div>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label"><b>Description</b></label>
+            <textarea name="listing[description]" row="10" cols="50" class="form-control" required><%=listing.description%> </textarea>
+            <div class="invalid-feedback">Please Enter short description</div>
+        </div>
+        
+        <div class="mb-3">
+            <label for="resumeLink" class="form-label"><b>Resume Link</b></label>
+            <input name="listing[resumeLink]"  value="<%=listing.resumeLink%>"  type="text" class="form-control"  required/>
+           
+        </div>
+
+        <div class="mb-3">
+            <label for="portfolioLink" class="form-label"><b>Portfolio Link</b></label>
+            <input name="listing[portfolioLink]"  value="<%=listing.portfolioLink%>"  type="text" class="form-control"/>
+           
+        </div>
+
+        <!-- <div class="mb-3">
+            <label for="coverletter" class="form-label">Cover Letter</label>
+            <textarea name="listing[coverletter]" row="10" cols="50" class="form-control" required><%=listing.coverletter%> </textarea>
+            <div class="invalid-feedback">Please Enter short coverletter</div>
+        </div>
+
+        <div class="mb-3 "> 
+            <label for="fullname" class="form-label">Full Name</label>
+        <input name="listing[fullname]" value="<%=listing.fullname%>" type="text"  class="form-control" required/>
+        <div class="valid-feedback">Name Looks Good</div>
+        </div>
+
+        <div class="mb-3 "> 
+            <label for="address" class="form-label">Address</label>
+        <input name="listing[address]" value="<%=listing.address%>" type="text"  class="form-control" required/>
+        <div class="valid-feedback">Address Looks Good</div>
+        </div>
+
+        <div class="row">
+        <div class="mb-3 col-md-6">
+            <label for=" city" class="form-label">city</label>
+            <input name="listing[city]"  value="<%=listing.city%>"  type="text" class="form-control" required />
+            <div class="invalid-feedback">Please enter city</div>
+        </div>
+    
+        
+        <div class="mb-3 col-md-6">
+            <label for="country" class="form-label">Country</label>
+            <input name="listing[country]"  value="<%=listing.country%>"  type="text" class="form-control" required />
+            <div class="invalid-feedback">Please enter country</div>
+        </div>
+    </div>
+        
+        <div class="row">
+        <div class="mb-3 col-md-6">
+            <label for="phonenumber" class="form-label">Phone Number</label>
+            <input name="listing[phonenumber]" value="<%=listing.phonenumber%>" type="text"  class="form-control" required/>
+            <div class="invalid-feedback">Please Enter valid phonenumber</div>
+        </div>
+
+        <div class="mb-3 col-md-6">
+            <label for="email" class="form-label">Email</label>
+            <input name="listing[email]"  value="<%=listing.email%>"  type="text" class="form-control" required />
+            <div class="invalid-feedback">Please enter email</div>
+        </div>
+    </div>
+
+    <div class="mb-3 ">
+        <label for="collegename" class="form-label">College Name</label>
+        <input name="listing[collegename]"  value="<%=listing.collegename%>"  type="text" class="form-control" required />
+        <div class="invalid-feedback">Please enter College Name</div>
+    </div>
+
+    <div class="mb-3 col-md-6">
+        <label for="cgpa" class="form-label">CGPA</label>
+        <input name="listing[cgpa]" value="<%=listing.cgpa%>" type="text"  class="form-control" required/>
+        <div class="invalid-feedback">Please Enter valid cgpa</div>
+    </div>
+
+    <div class="mb-3 ">
+        <label for="skills" class="form-label">Skills</label>
+        <input name="listing[skills]"  value="<%=listing.skills%>"  type="text" class="form-control" required />
+        <div class="invalid-feedback">Please enter Skills</div>
+    </div> -->
+
+    <div class="mb-3 ">
+        <label for="applicationdate" class="form-label"><b>Date of Application</b></label>
+        <input name="listing[applicationdate]"  value="<%=listing.applicationdate%>"  type="text" class="form-control" required />
+        <div class="invalid-feedback">Please enter Date of Application</div>
+    </div>
+       
+        
+         
+        <button class="btn btn-dark edit-btn mt-3">ADD</button>
+    </form>
+</div>
+</div>
+<script src="/js/script.js"></script>
+<!-- </body>
+</html> -->

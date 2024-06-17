@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanderlust</title>
+    
+    <script src="app.js"></script>
+    <style>
+        .row{
+             
+            background-image: url("https://i.pinimg.com/736x/bd/40/86/bd4086b073a75c535b043662fe40030f.jpg");
+        }
+    </style>
+</head>
+<body>
+     
+    <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/"><i class="fa-regular fa-compass"></i></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+          data-bs-target="#navbarNavAltMarkup" 
+           
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link" href="/">Home</a>
+              <a class="nav-link" href="/listings">All Applications</a>
+              <a class="nav-link" href="/listings/new">Add new Application</a>
+               
+               
+            </div>
+          </div>
+        </div>
+      </nav>
+    
+      <!-- Index Page -->
+      <h1>All Applications</h1> <br/>
+     <!-- search bar -->
+    <form class="d-flex col-6 offset-3" role="search">
+      <input class="form-control me-2" type="search" id="myinput" placeholder="Search" aria-label="Search" onkeyup="filterList()">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+      <div id="searchcontainer"></div>
+    </form>
+    <br/>
+
+    <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1">
+      <% for(let listing of allListings){ %>
+         
+         <div class="card col listing-card" >
+          <a   href="/listings/<%=listing._id%>" class="listing-link">
+          <!-- <div  class="card-img-overlay"></div> -->
+          
+          <div  class="card-body ">
+            <p class="card-text">
+             <b> <%=listing.company%></b><br>
+               <%=listing.jobtitle%> <br/>
+               Application Date:-<%=listing.applicationdate%><br/>
+               <button><%=listing.status%></button><br/>
+            </p>
+          </div>
+          <div class="dropdown"  onclick="statusdropdown()">
+            <div class="select">
+              <span class="selected" >status</span>
+              <div class="caret"></div>
+            </div>
+            <ul class="menu">
+              <li class="option">
+                <span class="option-text">Accepted</span>
+              </li>
+              <li class="option">
+                <span class="option-text">Interviewed</span>
+              </li>
+              <li class="option">
+                <span class="option-text">Under Consideration</span>
+              </li>
+              <li class="option">
+                <span class="option-text">Inactive</span>
+              </li>
+              <li class="option">
+                <span class="option-text">Rejected</span>
+              </li>
+              <li class="active option">
+                <span class="option-text">Status</span>
+              </li>
+            </ul>
+          </div>
+         </a>
+          
+          <!-- </a> -->
+       </div>
+      <!-- </a> -->
+      
+       <%} %>
+      </div>
+    <!-- New Application -->
+
+    <div class="row">
+        <div class="col-8 offset-2">
+            <h3>Add New Application</h3>
+             
+    <form method="POST" action="/listings" novalidate  class="needs-validation">
+        <div class="mb-3"> 
+        <label for="company" class="form-label"><b>Company Name</b></label>
+        <input name="listing[company]" placeholder="Add a company Name" type="text" class="form-control" required/>
+        <div class="valid-feedback">Company looks good</div>
+    </div>
+
+    <div class="mb-3"> 
+        <label for="jobtitle" class="form-label"><b>Job Title</b></label>
+        <input name="listing[jobtitle]" placeholder="Add a jobtitle" type="text" class="form-control" required/>
+        <div class="valid-feedback">JobTitle looks good</div>
+    </div>
+         
+        <div class="mb-3">
+            <label for="description" class="form-label"><b>Description</b></label>
+            <textarea name="listing[description]" placeholder="Enter Description" type="text" class="form-control" required></textarea>
+            <div class="invalid-feedback">Please enter short description</div>
+        </div>
+        
+        
+        <div class="mb-3">
+            <label for="resumeLink" class="form-label"><b>Resume Link</b></label>
+            <input name="listing[resumeLink]" placeholder="Enter Resume url/link" type="text" class="form-control" />
+            
+        </div>
+
+        <div class="mb-3">
+            <label for="portfolioLink" class="form-label"><b>Portfolio Link</b></label>
+            <input name="listing[portfolioLink]" placeholder="Enter Portfolio url/link" type="text" class="form-control" />
+            
+        </div>
+
+        
+        <div class="mb-3">
+            <label for="applicationdate" class="form-label"><b>Date of Application</b></label>
+            <input name="listing[applicationdate]" placeholder="Date of Application" type="text" class="form-control" required />
+            <div class="invalid-feedback">Please enter Date of Application</div>
+        </div>
+        <div class="mb-3">
+            <label for="status" class="form-label"><b>Set Status</b></label>
+            <!-- <input name="listing[applicationdate]" placeholder="Date of Application" type="text" class="form-control" required /> -->
+            <div class="dropdown" name="listing[status]"  onclick="statusdropdown()">
+                <div class="select">
+                  <span class="selected" >status</span>
+                  <div class="caret"></div>
+                </div>
+                <ul class="menu">
+                  <li class="option">
+                    <span class="option-text">Accepted</span>
+                  </li>
+                  <li class="option">
+                    <span class="option-text">Interviewed</span>
+                  </li>
+                  <li class="option">
+                    <span class="option-text">Under Consideration</span>
+                  </li>
+                  <li class="option">
+                    <span class="option-text">Inactive</span>
+                  </li>
+                  <li class="option">
+                    <span class="option-text">Rejected</span>
+                  </li>
+                  <li class="active option">
+                    <span class="option-text">Status</span>
+                  </li>
+                </ul>
+              </div>
+            <div class="invalid-feedback">Please Set Appropriate Status of application</div>
+        </div>
+
+        <br/><br/>
+        <button class="btn btn-dark add-btn">ADD</button>
+        <br/><br/>
+    </form>
+</div>
+</div>
+
+
+<!-- Show Page -->
+<!-- Edit Page -->
+    
+</body>
+</html>

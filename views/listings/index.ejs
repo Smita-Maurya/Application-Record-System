@@ -1,0 +1,136 @@
+ 
+<% layout("/layouts/boilerplate") %>
+<body>
+    <h1>All Applications</h1> <br/>
+     <!-- search bar -->
+    <form class="d-flex col-6 offset-3" role="search">
+      <input class="form-control me-2" type="search" id="myinput" placeholder="Search" aria-label="Search" onkeyup="filterList()">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+      <div id="searchcontainer"></div>
+    </form>
+    <br/>
+
+    <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1">
+      <% for(let listing of allListings){ %>
+         
+         <div class="card col listing-card" >
+          <a   href="/listings/<%=listing._id%>" class="listing-link">
+          <!-- <div  class="card-img-overlay"></div> -->
+          
+          <div  class="card-body ">
+            <p class="card-text">
+             <b> <%=listing.company%></b><br>
+               <%=listing.jobtitle%> <br/>
+               Application Date:-<%=listing.applicationdate%><br/>
+               <button><%=listing.status%></button><br/>
+            </p>
+          </div>
+          <div class="dropdown"  onclick="statusdropdown()">
+            <div class="select">
+              <span class="selected" >status</span>
+              <div class="caret"></div>
+            </div>
+            <ul class="menu">
+              <li class="option">
+                <span class="option-text">Accepted</span>
+              </li>
+              <li class="option">
+                <span class="option-text">Interviewed</span>
+              </li>
+              <li class="option">
+                <span class="option-text">Under Consideration</span>
+              </li>
+              <li class="option">
+                <span class="option-text">Inactive</span>
+              </li>
+              <li class="option">
+                <span class="option-text">Rejected</span>
+              </li>
+              <li class="active option">
+                <span class="option-text">Status</span>
+              </li>
+            </ul>
+          </div>
+         </a>
+          
+          <!-- </a> -->
+       </div>
+      <!-- </a> -->
+      
+       <%} %>
+      </div>
+</body>
+
+
+<!-- functionality of search bar -->
+<script>
+  document.querySelector('#myinput'),
+  addEventListener('input', filterList);
+
+  function filterList(){
+    const searchInput=document.querySelector('#myinput');
+    const filter= searchInput.value.toLowerCase();
+    const listItem=document.querySelectorAll('.listing-link');
+
+    listItem.forEach((item)=>{
+      let text=item.textContent;
+      if(text.toLocaleLowerCase().includes(filter.toLocaleLowerCase())){
+        item.style.display='';
+      }
+      else{
+        item.style.display='none';
+      }
+    });
+  }
+
+  allListings.sort(function(a, b) {
+    let nameA = a.company.toUpperCase(); // ignore case
+    let nameB = b.company.toUpperCase(); // ignore case
+    if (nameA < nameB) {
+        return -1;
+    }
+    if (nameA > nameB) {
+        return 1;
+    }
+    return 0; // names are equal
+  });
+  
+  </script>
+<!-- </html> -->
+
+<script>
+  function statusdropdown(){
+    const dropdowns=document.querySelectorAll(".dropdown");
+  
+    dropdowns.forEach(dropdown=>{
+      const select = dropdown.querySelector(".select");
+      const caret = dropdown.querySelector(".caret");
+      const menu = dropdown.querySelector(".menu");
+      // const options = dropdown.querySelector(".menu li");
+       const options = dropdown.querySelectorAll(".option");
+      const selected = dropdown.querySelector(".selected");
+  
+  
+      select.addEventListener("click", ()=>{
+        select.classList.toggle("select-clicked");
+        caret.classList.toggle("caret-rotate");
+        menu.classList.toggle("menu-open");
+      });
+  
+  
+      options.forEach(option=>{
+        option.addEventListener("click",()=>{
+          selected.innerText=option.querySelector(".option-text").innerText;
+          select.classList.remove("select-clicked");
+          caret.classList.remove("caret-rotate");
+          menu.classList.remove("menu-open");
+  
+          options.forEach(option=>{
+            option.classList.remove("active");
+          });
+          option.classList.add("active");
+        });
+      });
+    });
+}
+</script>
